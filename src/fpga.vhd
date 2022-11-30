@@ -135,17 +135,115 @@ architecture FULL of FPGA is
 
     signal status_led_g : std_logic_vector(STATUS_LEDS-1 downto 0);
     signal status_led_r : std_logic_vector(STATUS_LEDS-1 downto 0);  
+    -- IO Expander
+    signal io_reset     : std_logic;
+    signal ioexp_o      : std_logic_vector(8-1 downto 0);
+    signal ioexp_i      : std_logic_vector(8-1 downto 0);
+    signal ioexp_req    : std_logic;
+    signal ioexp_gnt    : std_logic;
+    signal ioexp_busy   : std_logic;
+    signal ioexp_done   : std_logic;
+    signal sda_o        : std_logic;
+    signal sda_oen      : std_logic;
+    signal scl_o        : std_logic;
+    signal scl_oen      : std_logic;
+    -- QSFP I2C
+    signal qsfp_sda     : std_logic;
+    signal qsfp_scl     : std_logic;
+    signal qsfp_sda_o   : std_logic;
+    signal qsfp_scl_o   : std_logic;
+    signal qsfp_sda_oe  : std_logic;
+    signal qsfp_scl_oe  : std_logic;
+    -- I2C arbitration
+    signal qsfp_idle_timer  : unsigned(12 downto 0); -- 80 us timer
+    signal qsfp_scl_oe_sync : std_logic;
+    signal qsfp_i2c_idle    : std_logic;
 
 begin
 
-    FPGA_I2C_SCL      <= '1';
-    FPGA_I2C_SDA      <= '1';
-    FPGA_I2C_REQ_L    <= '1';
+    FPGA_I2C_REQ_L    <= '0';
 
     FPGA2BMC_IRQ      <= '1';
     FPGA2BMC_MST_EN_N <= '1';
     BMC2FPGA_SPI_MISO <= '1';
     
+    -- TCS5455 IO expander for QSFP control
+    -- O(4): lp_mode; O(7): reset_n; I(5): int_n, I(6): mod_prs_n
+    i2c_io_exp_i: entity work.i2c_io_exp
+    generic map (
+        IIC_CLK_CNT    => X"0080",   -- Clock dividier
+        IIC_DEV_ADDR   => "0100000", -- 0x20
+        REFRESH_CYCLES => 16#100000# -- ~21 ms @ 50 MHz
+    )
+    port map (
+        --
+        RESET      => io_reset,
+        CLK        => SYS_CLK_50M,
+        -- Remote I/O interface
+        DIR        => "01100000",
+        O          => ioexp_o,
+        I          => ioexp_i,
+        -- Control
+        REFRESH    => '0', -- Do not refresh maually, use auto-refresh each REFRESH_CYCLES
+        CONFIG     => '0', -- Do not configure maually, config on powerup and when DIR or O port changes
+        ERROR      => open,
+        -- I2C bus arbitration
+        I2C_REQ    => ioexp_req,
+        I2C_GNT    => ioexp_gnt,
+        I2C_BUSY   => ioexp_busy,
+        I2C_DONE   => ioexp_done,
+        -- I2C interface
+        SCL_I      => FPGA_I2C_SCL,
+        SCL_O      => scl_o,
+        SCL_OEN    => scl_oen,
+        SDA_I      => FPGA_I2C_SDA,
+        SDA_O      => sda_o,
+        SDA_OEN    => sda_oen
+    );
+
+    sync_qsfp_i2c_i: entity work.ASYNC_OPEN_LOOP
+    generic map (
+        IN_REG   => false,
+        TWO_REG  => true
+    )
+    port map (
+        ADATAIN  => qsfp_scl_oe,
+        BCLK     => SYS_CLK_50M,
+        BDATAOUT => qsfp_scl_oe_sync
+    );
+
+    --
+    arbit_p: process(SYS_CLK_50M)
+    begin
+        if rising_edge(SYS_CLK_50M) then
+            if (ioexp_req = '1') and (qsfp_i2c_idle = '1') then
+                ioexp_gnt <= not FPGA_I2C_MUX_GNT;
+            elsif ioexp_done = '1' then
+                ioexp_gnt <= '0';
+            end if;
+            -- Detect activity on QSFP I2C
+            if qsfp_scl_oe_sync = '1' then
+                qsfp_idle_timer <= (others => '0');
+            elsif qsfp_idle_timer(qsfp_idle_timer'high) = '0' then
+                qsfp_idle_timer <= qsfp_idle_timer + 1;
+            end if;
+        end if;
+    end process;
+
+    qsfp_i2c_idle <= qsfp_idle_timer(qsfp_idle_timer'high);
+
+    FPGA_I2C_SCL <= scl_o      when (scl_oen = '0' and ioexp_busy = '1')     else
+                    qsfp_scl_o when (qsfp_scl_oe = '1' and ioexp_busy = '0') else
+                   'Z';
+
+    FPGA_I2C_SDA <= sda_o      when (sda_oen = '0' and ioexp_busy = '1')     else
+                    qsfp_sda_o when (qsfp_sda_oe = '1' and ioexp_busy = '0') else
+                   'Z';
+
+    -- Clock stretching - hold SCL low when the bus is busy
+    qsfp_scl <= '0' when (ioexp_busy = '1') else FPGA_I2C_SCL;
+    qsfp_sda <= '0' when (ioexp_busy = '1') else FPGA_I2C_SDA;
+
     cm_i : entity work.FPGA_COMMON
     generic map (
         SYSCLK_FREQ             => 50,
@@ -164,6 +262,7 @@ begin
         
         QSFP_PORTS              => 1,
         QSFP_I2C_PORTS          => 1,
+        QSFP_I2C_TRISTATE       => false,
 
         STATUS_LEDS             => STATUS_LEDS,
         MISC_IN_WIDTH           => MISC_IN_WIDTH,
@@ -214,14 +313,18 @@ begin
         ETH_LED_R            => open,
         ETH_LED_G            => open,
         
-        QSFP_I2C_SCL         => open,
-        QSFP_I2C_SDA         => open,
+        QSFP_I2C_SCL_I(0)    => qsfp_scl,
+        QSFP_I2C_SDA_I(0)    => qsfp_sda,
+        QSFP_I2C_SCL_O(0)    => qsfp_scl_o,
+        QSFP_I2C_SCL_OE(0)   => qsfp_scl_oe,
+        QSFP_I2C_SDA_O(0)    => qsfp_sda_o,
+        QSFP_I2C_SDA_OE(0)   => qsfp_sda_oe,
 
         QSFP_MODSEL_N        => open,
-        QSFP_LPMODE          => open,
-        QSFP_RESET_N         => open,
-        QSFP_MODPRS_N        => (others => '0'), -- fake module is present
-        QSFP_INT_N           => (others => '1'), -- TODO
+        QSFP_LPMODE(0)       => ioexp_o(4),
+        QSFP_RESET_N(0)      => ioexp_o(7),
+        QSFP_MODPRS_N        => (others => ioexp_i(6)),
+        QSFP_INT_N           => (others => ioexp_i(5)),
 
         --MEM_CLK                 => mem_clk,
         --MEM_RST                 => not mem_rst_n,
@@ -240,6 +343,8 @@ begin
         --EMIF_ECC_USR_INT        => emif_ecc_usr_int,
         --EMIF_CAL_SUCCESS        => emif_cal_success,
         --EMIF_CAL_FAIL           => emif_cal_fail,
+        BOOT_MI_RESET           => io_reset,
+
 
         STATUS_LED_G         => status_led_g,
         STATUS_LED_R         => status_led_r,
@@ -252,3 +357,4 @@ begin
     USER_LED_R <= status_led_r(0);
 
 end architecture;
+
