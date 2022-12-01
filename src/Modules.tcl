@@ -4,10 +4,16 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
+set IOEXP_BASE "$OFM_PATH/comp/ctrls/i2c_io_exp"
+set ASYNC_BASE "$OFM_PATH/comp/base/async"
+
 # converting input list to associative array
 array set ARCHGRP_ARR $ARCHGRP
 
-lappend COMPONENTS [list "FPGA_COMMON" $ARCHGRP_ARR(CORE_BASE) $ARCHGRP]
+lappend COMPONENTS [list "FPGA_COMMON"       $ARCHGRP_ARR(CORE_BASE) $ARCHGRP]
+lappend COMPONENTS [list "I2C IO EXPANDER"   $IOEXP_BASE               "FULL"]
+lappend COMPONENTS [list "OPEN_LOOP"         $ASYNC_BASE/open_loop     "FULL"]
+lappend COMPONENTS [list "RESET"             $ASYNC_BASE/reset         "FULL"]
 
 # IP sources
 lappend MOD "$ENTITY_BASE/ip/iopll_ip.ip"
