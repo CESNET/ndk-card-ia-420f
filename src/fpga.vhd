@@ -137,6 +137,7 @@ architecture FULL of FPGA is
     signal status_led_r : std_logic_vector(STATUS_LEDS-1 downto 0);  
     -- IO Expander
     signal io_reset     : std_logic;
+	 signal io_reset_sync: std_logic;
     signal ioexp_o      : std_logic_vector(8-1 downto 0);
     signal ioexp_i      : std_logic_vector(8-1 downto 0);
     signal ioexp_req    : std_logic;
@@ -166,7 +167,19 @@ begin
     FPGA2BMC_IRQ      <= '1';
     FPGA2BMC_MST_EN_N <= '1';
     BMC2FPGA_SPI_MISO <= '1';
-    
+
+    ioreset_sync_i : entity work.ASYNC_RESET
+    generic map (
+        TWO_REG  => false,
+        OUT_REG  => true,
+        REPLICAS => 1
+    )
+    port map (
+        CLK        => SYS_CLK_50M,
+        ASYNC_RST  => io_reset,
+        OUT_RST(0) => io_reset_sync
+    );
+
     -- TCS5455 IO expander for QSFP control
     -- O(4): lp_mode; O(7): reset_n; I(5): int_n, I(6): mod_prs_n
     i2c_io_exp_i: entity work.i2c_io_exp
@@ -177,7 +190,7 @@ begin
     )
     port map (
         --
-        RESET      => io_reset,
+        RESET      => io_reset_sync,
         CLK        => SYS_CLK_50M,
         -- Remote I/O interface
         DIR        => "01100000",
@@ -211,7 +224,6 @@ begin
         BCLK     => SYS_CLK_50M,
         BDATAOUT => qsfp_scl_oe_sync
     );
-
     --
     arbit_p: process(SYS_CLK_50M)
     begin
