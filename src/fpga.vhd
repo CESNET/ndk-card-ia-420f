@@ -44,58 +44,48 @@ port (
     QSFP_TX_N          : out   std_logic_vector(8-1 downto 0);
 
     -- =========================================================================
-    -- DDR4
+    -- DDR4 PORT0
     -- =========================================================================
-    --I2C_DDR4_DIMM_SDA : inout std_logic;
-    --I2C_DDR4_DIMM_SCL : inout std_logic;
+    P0_DDR4_REFCLK       : in    std_logic;
+    P0_DDR4_CLK_P        : out   std_logic_vector(0 downto 0);
+    P0_DDR4_CLK_N        : out   std_logic_vector(0 downto 0);
+    P0_DDR4_A            : out   std_logic_vector(16 downto 0);
+    P0_DDR4_ACT_L        : out   std_logic_vector(0 downto 0);
+    P0_DDR4_BA           : out   std_logic_vector(1 downto 0);
+    P0_DDR4_BG           : out   std_logic_vector(1 downto 0);
+    P0_DDR4_CKE          : out   std_logic_vector(0 downto 0);
+    P0_DDR4_CS_L         : out   std_logic_vector(0 downto 0);
+    P0_DDR4_ODT          : out   std_logic_vector(0 downto 0);
+    P0_DDR4_RESET_L      : out   std_logic_vector(0 downto 0);
+    P0_DDR4_PARITY       : out   std_logic_vector(0 downto 0);
+    P0_DDR4_ALERT_L      : in    std_logic_vector(0 downto 0);
+    P0_DDR4_DM           : inout std_logic_vector(8 downto 0);
+    P0_DDR4_DQS_P        : inout std_logic_vector(8 downto 0);
+    P0_DDR4_DQS_N        : inout std_logic_vector(8 downto 0);
+    P0_DDR4_DQ           : inout std_logic_vector(71 downto 0);
+    P0_RZQ               : in    std_logic;
 
-    -- DDR4 CH0 interface
-    --DDR4_CH0_REFCLK_P  : in    std_logic;
-    --DDR4_CH0_REFCLK_N  : in    std_logic;
-    --DDR4_CH0_CLK_P     : out   std_logic;
-    --DDR4_CH0_CLK_N     : out   std_logic;
---
-    --DDR4_CH0_A         : out   std_logic_vector(17-1 downto 0);
-    --DDR4_CH0_ACT_L     : out   std_logic_vector(0 downto 0);
-    --DDR4_CH0_BA        : out   std_logic_vector(2-1 downto 0);
-    --DDR4_CH0_BG        : out   std_logic_vector(2-1 downto 0);
-    --DDR4_CH0_CKE       : out   std_logic_vector(0 downto 0);
-    --DDR4_CH0_CS_L      : out   std_logic_vector(0 downto 0);
-    --DDR4_CH0_ODT       : out   std_logic_vector(0 downto 0);
-    --DDR4_CH0_RESET_L   : out   std_logic_vector(0 downto 0);
-    --DDR4_CH0_PAR       : out   std_logic_vector(0 downto 0);
-    --DDR4_CH0_ALERT_L   : in    std_logic_vector(0 downto 0);
-    --DDR4_CH0_DQS_P     : inout std_logic_vector(9-1 downto 0);
-    --DDR4_CH0_DQS_N     : inout std_logic_vector(9-1 downto 0);
-    --DDR4_CH0_DQ        : inout std_logic_vector(72-1 downto 0);
-    ----DDR4_CH0_RZQ       : inout std_logic;
-    --DDR4_CH0_RZQ       : in    std_logic;
-    
-    --DDR4_CH0_C2        : out   std_logic;  --Module rank address (select of the whole memory?)
-    --DDR4_CH0_EVENT_N   : in    std_logic;  --Asserted on critical temperature
-    --DDR4_CH0_SAVE_N    : in    std_logic;
-
-    -- DDR4 CH1 interface
-    --DDR4_CH1_REFCLK_P  : in    std_logic;
-    --DDR4_CH1_REFCLK_N  : in    std_logic;
-    --DDR4_CH1_CLK_P     : out   std_logic;
-    --DDR4_CH1_CLK_N     : out   std_logic;
---
-    --DDR4_CH1_A         : out   std_logic_vector(17-1 downto 0);
-    --DDR4_CH1_ACT_L     : out   std_logic_vector(0 downto 0);
-    --DDR4_CH1_BA        : out   std_logic_vector(2-1 downto 0);
-    --DDR4_CH1_BG        : out   std_logic_vector(2-1 downto 0);
-    --DDR4_CH1_CKE       : out   std_logic_vector(0 downto 0);
-    --DDR4_CH1_CS_L      : out   std_logic_vector(0 downto 0);
-    --DDR4_CH1_ODT       : out   std_logic_vector(0 downto 0);
-    --DDR4_CH1_RESET_L   : out   std_logic_vector(0 downto 0); 
-    --DDR4_CH1_PAR       : out   std_logic_vector(0 downto 0); 
-    --DDR4_CH1_ALERT_L   : in    std_logic_vector(0 downto 0); 
-    --DDR4_CH1_DQS_P     : inout std_logic_vector(9-1 downto 0);
-    --DDR4_CH1_DQS_N     : inout std_logic_vector(9-1 downto 0);
-    --DDR4_CH1_DQ        : inout std_logic_vector(72-1 downto 0);
-    ----DDR4_CH1_RZQ       : inout std_logic;
-    --DDR4_CH1_RZQ       : in    std_logic;     
+    -- =========================================================================
+    -- DDR4 PORT1
+    -- =========================================================================
+    P1_DDR4_REFCLK       : in    std_logic;
+    P1_DDR4_CLK_P        : out   std_logic_vector(0 downto 0);
+    P1_DDR4_CLK_N        : out   std_logic_vector(0 downto 0);
+    P1_DDR4_A            : out   std_logic_vector(16 downto 0);
+    P1_DDR4_ACT_L        : out   std_logic_vector(0 downto 0);
+    P1_DDR4_BA           : out   std_logic_vector(1 downto 0);
+    P1_DDR4_BG           : out   std_logic_vector(1 downto 0);
+    P1_DDR4_CKE          : out   std_logic_vector(0 downto 0);
+    P1_DDR4_CS_L         : out   std_logic_vector(0 downto 0);
+    P1_DDR4_ODT          : out   std_logic_vector(0 downto 0);
+    P1_DDR4_RESET_L      : out   std_logic_vector(0 downto 0);
+    P1_DDR4_PARITY       : out   std_logic_vector(0 downto 0);
+    P1_DDR4_ALERT_L      : in    std_logic_vector(0 downto 0);
+    P1_DDR4_DM           : inout std_logic_vector(8 downto 0);
+    P1_DDR4_DQS_P        : inout std_logic_vector(8 downto 0);
+    P1_DDR4_DQS_N        : inout std_logic_vector(8 downto 0);
+    P1_DDR4_DQ           : inout std_logic_vector(71 downto 0);
+    P1_RZQ               : in    std_logic;  
   
     -- =========================================================================
     -- I2C
@@ -120,45 +110,197 @@ end entity;
 
 architecture FULL of FPGA is
 
+    component onboard_ddr4_0 is
+    port (
+        local_reset_req      : in    std_logic                       := 'X';             -- local_reset_req
+        local_reset_done     : out   std_logic;                                          -- local_reset_done
+        pll_ref_clk          : in    std_logic                       := 'X';             -- clk
+        pll_ref_clk_out      : out   std_logic;                                          -- clk
+        pll_locked           : out   std_logic;                                          -- pll_locked
+        oct_rzqin            : in    std_logic                       := 'X';             -- oct_rzqin
+        mem_ck               : out   std_logic_vector(0 downto 0);                       -- mem_ck
+        mem_ck_n             : out   std_logic_vector(0 downto 0);                       -- mem_ck_n
+        mem_a                : out   std_logic_vector(16 downto 0);                      -- mem_a
+        mem_act_n            : out   std_logic_vector(0 downto 0);                       -- mem_act_n
+        mem_ba               : out   std_logic_vector(1 downto 0);                       -- mem_ba
+        mem_bg               : out   std_logic_vector(1 downto 0);                       -- mem_bg
+        mem_cke              : out   std_logic_vector(0 downto 0);                       -- mem_cke
+        mem_cs_n             : out   std_logic_vector(0 downto 0);                       -- mem_cs_n
+        mem_odt              : out   std_logic_vector(0 downto 0);                       -- mem_odt
+        mem_reset_n          : out   std_logic_vector(0 downto 0);                       -- mem_reset_n
+        mem_par              : out   std_logic_vector(0 downto 0);                       -- mem_par
+        mem_alert_n          : in    std_logic_vector(0 downto 0)    := (others => 'X'); -- mem_alert_n
+        mem_dqs              : inout std_logic_vector(8 downto 0)    := (others => 'X'); -- mem_dqs
+        mem_dqs_n            : inout std_logic_vector(8 downto 0)    := (others => 'X'); -- mem_dqs_n
+        mem_dq               : inout std_logic_vector(71 downto 0)   := (others => 'X'); -- mem_dq
+        mem_dbi_n            : inout std_logic_vector(8 downto 0)    := (others => 'X'); -- mem_dbi_n
+        local_cal_success    : out   std_logic;                                          -- local_cal_success
+        local_cal_fail       : out   std_logic;                                          -- local_cal_fail
+        emif_usr_reset_n     : out   std_logic;                                          -- reset_n
+        emif_usr_clk         : out   std_logic;                                          -- clk
+        amm_ready_0          : out   std_logic;                                          -- waitrequest_n
+        amm_read_0           : in    std_logic                       := 'X';             -- read
+        amm_write_0          : in    std_logic                       := 'X';             -- write
+        amm_address_0        : in    std_logic_vector(26 downto 0)   := (others => 'X'); -- address
+        amm_readdata_0       : out   std_logic_vector(575 downto 0);                     -- readdata
+        amm_writedata_0      : in    std_logic_vector(575 downto 0)  := (others => 'X'); -- writedata
+        amm_burstcount_0     : in    std_logic_vector(6 downto 0)    := (others => 'X'); -- burstcount
+        amm_byteenable_0     : in    std_logic_vector(71 downto 0)   := (others => 'X'); -- byteenable
+        amm_readdatavalid_0  : out   std_logic;                                          -- readdatavalid
+        calbus_read          : in    std_logic                       := 'X';             -- calbus_read
+        calbus_write         : in    std_logic                       := 'X';             -- calbus_write
+        calbus_address       : in    std_logic_vector(19 downto 0)   := (others => 'X'); -- calbus_address
+        calbus_wdata         : in    std_logic_vector(31 downto 0)   := (others => 'X'); -- calbus_wdata
+        calbus_rdata         : out   std_logic_vector(31 downto 0);                      -- calbus_rdata
+        calbus_seq_param_tbl : out   std_logic_vector(4095 downto 0);                    -- calbus_seq_param_tbl
+        calbus_clk           : in    std_logic                       := 'X'              -- clk
+    );
+    end component;
+
+    component onboard_ddr4_1 is
+    port (
+        local_reset_req                 : in    std_logic                       := 'X';             -- local_reset_req
+        local_reset_done                : out   std_logic;                                          -- local_reset_done
+        pll_ref_clk                     : in    std_logic                       := 'X';             -- clk
+        pll_ref_clk_out                 : out   std_logic;                                          -- clk
+        pll_locked                      : out   std_logic;                                          -- pll_locked
+        oct_rzqin                       : in    std_logic                       := 'X';             -- oct_rzqin
+        mem_ck                          : out   std_logic_vector(0 downto 0);                       -- mem_ck
+        mem_ck_n                        : out   std_logic_vector(0 downto 0);                       -- mem_ck_n
+        mem_a                           : out   std_logic_vector(16 downto 0);                      -- mem_a
+        mem_act_n                       : out   std_logic_vector(0 downto 0);                       -- mem_act_n
+        mem_ba                          : out   std_logic_vector(1 downto 0);                       -- mem_ba
+        mem_bg                          : out   std_logic_vector(1 downto 0);                       -- mem_bg
+        mem_cke                         : out   std_logic_vector(0 downto 0);                       -- mem_cke
+        mem_cs_n                        : out   std_logic_vector(0 downto 0);                       -- mem_cs_n
+        mem_odt                         : out   std_logic_vector(0 downto 0);                       -- mem_odt
+        mem_reset_n                     : out   std_logic_vector(0 downto 0);                       -- mem_reset_n
+        mem_par                         : out   std_logic_vector(0 downto 0);                       -- mem_par
+        mem_alert_n                     : in    std_logic_vector(0 downto 0)    := (others => 'X'); -- mem_alert_n
+        mem_dqs                         : inout std_logic_vector(8 downto 0)    := (others => 'X'); -- mem_dqs
+        mem_dqs_n                       : inout std_logic_vector(8 downto 0)    := (others => 'X'); -- mem_dqs_n
+        mem_dq                          : inout std_logic_vector(71 downto 0)   := (others => 'X'); -- mem_dq
+        mem_dbi_n                       : inout std_logic_vector(8 downto 0)    := (others => 'X'); -- mem_dbi_n
+        local_cal_success               : out   std_logic;                                          -- local_cal_success
+        local_cal_fail                  : out   std_logic;                                          -- local_cal_fail
+        calbus_read                     : in    std_logic                       := 'X';             -- calbus_read
+        calbus_write                    : in    std_logic                       := 'X';             -- calbus_write
+        calbus_address                  : in    std_logic_vector(19 downto 0)   := (others => 'X'); -- calbus_address
+        calbus_wdata                    : in    std_logic_vector(31 downto 0)   := (others => 'X'); -- calbus_wdata
+        calbus_rdata                    : out   std_logic_vector(31 downto 0);                      -- calbus_rdata
+        calbus_seq_param_tbl            : out   std_logic_vector(4095 downto 0);                    -- calbus_seq_param_tbl
+        calbus_clk                      : in    std_logic                       := 'X';             -- clk
+        emif_usr_reset_n                : out   std_logic;                                          -- reset_n
+        emif_usr_clk                    : out   std_logic;                                          -- clk
+        ctrl_ecc_user_interrupt_0       : out   std_logic;                                          -- ctrl_ecc_user_interrupt
+        ctrl_ecc_readdataerror_0        : out   std_logic;                                          -- ctrl_ecc_readdataerror
+        ctrl_ecc_sts_intr               : out   std_logic_vector(0 downto 0);                       -- ctrl_ecc_sts_intr
+        ctrl_ecc_sts_sbe_error          : out   std_logic_vector(0 downto 0);                       -- ctrl_ecc_sts_sbe_error
+        ctrl_ecc_sts_dbe_error          : out   std_logic_vector(0 downto 0);                       -- ctrl_ecc_sts_dbe_error
+        ctrl_ecc_sts_corr_dropped       : out   std_logic_vector(0 downto 0);                       -- ctrl_ecc_sts_corr_dropped
+        ctrl_ecc_sts_sbe_count          : out   std_logic_vector(3 downto 0);                       -- ctrl_ecc_sts_sbe_count
+        ctrl_ecc_sts_dbe_count          : out   std_logic_vector(3 downto 0);                       -- ctrl_ecc_sts_dbe_count
+        ctrl_ecc_sts_corr_dropped_count : out   std_logic_vector(3 downto 0);                       -- ctrl_ecc_sts_corr_dropped_count
+        ctrl_ecc_sts_err_addr           : out   std_logic_vector(34 downto 0);                      -- ctrl_ecc_sts_err_addr
+        ctrl_ecc_sts_corr_dropped_addr  : out   std_logic_vector(34 downto 0);                      -- ctrl_ecc_sts_corr_dropped_addr
+        amm_ready_0                     : out   std_logic;                                          -- waitrequest_n
+        amm_read_0                      : in    std_logic                       := 'X';             -- read
+        amm_write_0                     : in    std_logic                       := 'X';             -- write
+        amm_address_0                   : in    std_logic_vector(26 downto 0)   := (others => 'X'); -- address
+        amm_readdata_0                  : out   std_logic_vector(511 downto 0);                     -- readdata
+        amm_writedata_0                 : in    std_logic_vector(511 downto 0)  := (others => 'X'); -- writedata
+        amm_burstcount_0                : in    std_logic_vector(6 downto 0)    := (others => 'X'); -- burstcount
+        amm_byteenable_0                : in    std_logic_vector(63 downto 0)   := (others => 'X'); -- byteenable
+        amm_readdatavalid_0             : out   std_logic                                           -- readdatavalid
+    );
+    end component;
+
+    component ddr4_calibration is
+    port (
+        calbus_read_0          : out std_logic;                                          -- calbus_read
+        calbus_write_0         : out std_logic;                                          -- calbus_write
+        calbus_address_0       : out std_logic_vector(19 downto 0);                      -- calbus_address
+        calbus_wdata_0         : out std_logic_vector(31 downto 0);                      -- calbus_wdata
+        calbus_rdata_0         : in  std_logic_vector(31 downto 0)   := (others => 'X'); -- calbus_rdata
+        calbus_seq_param_tbl_0 : in  std_logic_vector(4095 downto 0) := (others => 'X'); -- calbus_seq_param_tbl
+        calbus_clk             : out std_logic                                           -- clk
+    );
+    end component;
+
     -- DMA debug parameters
     constant DMA_GEN_LOOP_EN : boolean := true;
 
-    constant PCIE_LANES     : natural := 16;
-    constant PCIE_CLKS      : natural := 2;
-    constant PCIE_CONS      : natural := 1;
-    constant MISC_IN_WIDTH  : natural := 4;
-    constant MISC_OUT_WIDTH : natural := 4;
-    constant ETH_LANES      : natural := 4;
-    constant DMA_MODULES    : natural := ETH_PORTS;
-    constant DMA_ENDPOINTS  : natural := tsel(PCIE_ENDPOINT_MODE=1,PCIE_ENDPOINTS,2*PCIE_ENDPOINTS);
-    constant STATUS_LEDS    : natural := 4;
+    constant PCIE_LANES      : natural := 16;
+    constant PCIE_CLKS       : natural := 2;
+    constant PCIE_CONS       : natural := 1;
+    constant MISC_IN_WIDTH   : natural := 4;
+    constant MISC_OUT_WIDTH  : natural := 4;
+    constant ETH_LANES       : natural := 4;
+    constant DMA_MODULES     : natural := ETH_PORTS;
+    constant DMA_ENDPOINTS   : natural := tsel(PCIE_ENDPOINT_MODE=1,PCIE_ENDPOINTS,2*PCIE_ENDPOINTS);
+    constant STATUS_LEDS     : natural := 4;
 
-    signal status_led_g : std_logic_vector(STATUS_LEDS-1 downto 0);
-    signal status_led_r : std_logic_vector(STATUS_LEDS-1 downto 0);  
+    constant MEM_PORTS       : natural := 2;
+    constant MEM_ADDR_WIDTH  : natural := 27;
+    constant MEM_DATA_WIDTH  : natural := 512;
+    constant MEM_BURST_WIDTH : natural := 7;
+    constant AMM_FREQ_KHZ    : natural := 333333;
+
+    signal status_led_g           : std_logic_vector(STATUS_LEDS-1 downto 0);
+    signal status_led_r           : std_logic_vector(STATUS_LEDS-1 downto 0);  
     -- IO Expander
-    signal io_reset     : std_logic;
-	 signal io_reset_sync: std_logic;
-    signal ioexp_o      : std_logic_vector(8-1 downto 0);
-    signal ioexp_i      : std_logic_vector(8-1 downto 0);
-    signal ioexp_req    : std_logic;
-    signal ioexp_gnt    : std_logic;
-    signal ioexp_busy   : std_logic;
-    signal ioexp_done   : std_logic;
-    signal sda_o        : std_logic;
-    signal sda_oen      : std_logic;
-    signal scl_o        : std_logic;
-    signal scl_oen      : std_logic;
+    signal io_reset               : std_logic;
+    signal io_reset_sync          : std_logic;
+    signal ioexp_o                : std_logic_vector(8-1 downto 0);
+    signal ioexp_i                : std_logic_vector(8-1 downto 0);
+    signal ioexp_req              : std_logic;
+    signal ioexp_gnt              : std_logic;
+    signal ioexp_busy             : std_logic;
+    signal ioexp_done             : std_logic;
+    signal sda_o                  : std_logic;
+    signal sda_oen                : std_logic;
+    signal scl_o                  : std_logic;
+    signal scl_oen                : std_logic;
     -- QSFP I2C
-    signal qsfp_sda     : std_logic;
-    signal qsfp_scl     : std_logic;
-    signal qsfp_sda_o   : std_logic;
-    signal qsfp_scl_o   : std_logic;
-    signal qsfp_sda_oe  : std_logic;
-    signal qsfp_scl_oe  : std_logic;
+    signal qsfp_sda               : std_logic;
+    signal qsfp_scl               : std_logic;
+    signal qsfp_sda_o             : std_logic;
+    signal qsfp_scl_o             : std_logic;
+    signal qsfp_sda_oe            : std_logic;
+    signal qsfp_scl_oe            : std_logic;
     -- I2C arbitration
-    signal qsfp_idle_timer  : unsigned(12 downto 0); -- 80 us timer
-    signal qsfp_scl_oe_sync : std_logic;
-    signal qsfp_i2c_idle    : std_logic;
+    signal qsfp_idle_timer        : unsigned(12 downto 0); -- 80 us timer
+    signal qsfp_scl_oe_sync       : std_logic;
+    signal qsfp_i2c_idle          : std_logic;
+
+    signal calbus_read            : std_logic_vector(MEM_PORTS-1 downto 0);
+    signal calbus_write           : std_logic_vector(MEM_PORTS-1 downto 0);
+    signal calbus_address         : slv_array_t(MEM_PORTS-1 downto 0)(19 downto 0);
+    signal calbus_wdata           : slv_array_t(MEM_PORTS-1 downto 0)(31 downto 0);
+    signal calbus_rdata           : slv_array_t(MEM_PORTS-1 downto 0)(31 downto 0);
+    signal calbus_seq_param_tbl   : slv_array_t(MEM_PORTS-1 downto 0)(4095 downto 0);
+    signal calbus_clk             : std_logic_vector(MEM_PORTS-1 downto 0);
+
+    signal mem_clk                : std_logic_vector(MEM_PORTS-1 downto 0);
+    signal mem_rst                : std_logic_vector(MEM_PORTS-1 downto 0);
+    signal mem_rst_n              : std_logic_vector(MEM_PORTS-1 downto 0);
+    signal mem_pll_locked         : std_logic_vector(MEM_PORTS-1 downto 0);
+    signal mem_pll_locked_sync    : std_logic_vector(MEM_PORTS-1 downto 0);
+    
+    signal mem_avmm_ready         : std_logic_vector(MEM_PORTS-1 downto 0);
+    signal mem_avmm_read          : std_logic_vector(MEM_PORTS-1 downto 0);
+    signal mem_avmm_write         : std_logic_vector(MEM_PORTS-1 downto 0);
+    signal mem_avmm_address       : slv_array_t(MEM_PORTS-1 downto 0)(MEM_ADDR_WIDTH-1 downto 0);
+    signal mem_avmm_burstcount    : slv_array_t(MEM_PORTS-1 downto 0)(MEM_BURST_WIDTH-1 downto 0);
+    signal mem_avmm_writedata     : slv_array_t(MEM_PORTS-1 downto 0)(MEM_DATA_WIDTH-1 downto 0);
+    signal mem_avmm_readdata      : slv_array_t(MEM_PORTS-1 downto 0)(MEM_DATA_WIDTH-1 downto 0);
+    signal mem_avmm_readdatavalid : std_logic_vector(MEM_PORTS-1 downto 0);
+     
+    signal emif_rst_req           : std_logic_vector(MEM_PORTS-1 downto 0);
+    signal emif_rst_done          : std_logic_vector(MEM_PORTS-1 downto 0);
+    signal emif_ecc_usr_int       : std_logic_vector(MEM_PORTS-1 downto 0);
+    signal emif_cal_success       : std_logic_vector(MEM_PORTS-1 downto 0);
+    signal emif_cal_fail          : std_logic_vector(MEM_PORTS-1 downto 0);
 
 begin
 
@@ -290,11 +432,11 @@ begin
         DMA_RX_CHANNELS         => DMA_RX_CHANNELS/DMA_MODULES,
         DMA_TX_CHANNELS         => DMA_TX_CHANNELS/DMA_MODULES,
         
-        --MEM_PORTS               => MEM_PORTS,
-        --MEM_ADDR_WIDTH          => MEM_ADDR_WIDTH,
-        --MEM_DATA_WIDTH          => MEM_DATA_WIDTH,
-        --MEM_BURST_WIDTH         => MEM_BURST_WIDTH,
-        --AMM_FREQ_KHZ            => 266660,
+        MEM_PORTS               => MEM_PORTS,
+        MEM_ADDR_WIDTH          => MEM_ADDR_WIDTH,
+        MEM_DATA_WIDTH          => MEM_DATA_WIDTH,
+        MEM_BURST_WIDTH         => MEM_BURST_WIDTH,
+        AMM_FREQ_KHZ            => AMM_FREQ_KHZ,
 
         BOARD                   => "IA-420F",
         DEVICE                  => "AGILEX",
@@ -302,71 +444,185 @@ begin
         DMA_GEN_LOOP_EN         => DMA_GEN_LOOP_EN
     )
     port map(
-        SYSCLK               => SYS_CLK_50M,
-        SYSRST               => '0',
+        SYSCLK                 => SYS_CLK_50M,
+        SYSRST                 => '0',
 
-        PCIE_SYSCLK_P        => PCIE_REFCLK1 & PCIE_REFCLK0,
-        PCIE_SYSCLK_N        => (others => '0'),
-        PCIE_SYSRST_N(0)     => PCIE_SYSRST_N,
+        PCIE_SYSCLK_P          => PCIE_REFCLK1 & PCIE_REFCLK0,
+        PCIE_SYSCLK_N          => (others => '0'),
+        PCIE_SYSRST_N(0)       => PCIE_SYSRST_N,
 
-        PCIE_RX_P            => PCIE_RX_P,
-        PCIE_RX_N            => PCIE_RX_N,
-        PCIE_TX_P            => PCIE_TX_P,
-        PCIE_TX_N            => PCIE_TX_N,
+        PCIE_RX_P              => PCIE_RX_P,
+        PCIE_RX_N              => PCIE_RX_N,
+        PCIE_TX_P              => PCIE_TX_P,
+        PCIE_TX_N              => PCIE_TX_N,
         
-        ETH_REFCLK_P         => QSFP_REFCLK_156M & QSFP_REFCLK_156M,
-        ETH_REFCLK_N         => (others => '0'),
+        ETH_REFCLK_P           => QSFP_REFCLK_156M & QSFP_REFCLK_156M,
+        ETH_REFCLK_N           => (others => '0'),
         
-        ETH_RX_P             => QSFP_RX_P,
-        ETH_RX_N             => QSFP_RX_N,
-        ETH_TX_P             => QSFP_TX_P,
-        ETH_TX_N             => QSFP_TX_N,
+        ETH_RX_P               => QSFP_RX_P,
+        ETH_RX_N               => QSFP_RX_N,
+        ETH_TX_P               => QSFP_TX_P,
+        ETH_TX_N               => QSFP_TX_N,
 
-        ETH_LED_R            => open,
-        ETH_LED_G            => open,
+        ETH_LED_R              => open,
+        ETH_LED_G              => open,
         
-        QSFP_I2C_SCL_I(0)    => qsfp_scl,
-        QSFP_I2C_SDA_I(0)    => qsfp_sda,
-        QSFP_I2C_SCL_O(0)    => qsfp_scl_o,
-        QSFP_I2C_SCL_OE(0)   => qsfp_scl_oe,
-        QSFP_I2C_SDA_O(0)    => qsfp_sda_o,
-        QSFP_I2C_SDA_OE(0)   => qsfp_sda_oe,
+        QSFP_I2C_SCL_I(0)      => qsfp_scl,
+        QSFP_I2C_SDA_I(0)      => qsfp_sda,
+        QSFP_I2C_SCL_O(0)      => qsfp_scl_o,
+        QSFP_I2C_SCL_OE(0)     => qsfp_scl_oe,
+        QSFP_I2C_SDA_O(0)      => qsfp_sda_o,
+        QSFP_I2C_SDA_OE(0)     => qsfp_sda_oe,
 
-        QSFP_MODSEL_N        => open,
-        QSFP_LPMODE(0)       => ioexp_o(4),
-        QSFP_RESET_N(0)      => ioexp_o(7),
-        QSFP_MODPRS_N        => (others => ioexp_i(6)),
-        QSFP_INT_N           => (others => ioexp_i(5)),
+        QSFP_MODSEL_N          => open,
+        QSFP_LPMODE(0)         => ioexp_o(4),
+        QSFP_RESET_N(0)        => ioexp_o(7),
+        QSFP_MODPRS_N          => (others => ioexp_i(6)),
+        QSFP_INT_N             => (others => ioexp_i(5)),
 
-        --MEM_CLK                 => mem_clk,
-        --MEM_RST                 => not mem_rst_n,
---
-        --MEM_AVMM_READY          => mem_avmm_ready,
-        --MEM_AVMM_READ           => mem_avmm_read,
-        --MEM_AVMM_WRITE          => mem_avmm_write,
-        --MEM_AVMM_ADDRESS        => mem_avmm_address,
-        --MEM_AVMM_BURSTCOUNT     => mem_avmm_burstcount,
-        --MEM_AVMM_WRITEDATA      => mem_avmm_writedata,
-        --MEM_AVMM_READDATA       => mem_avmm_readdata,
-        --MEM_AVMM_READDATAVALID  => mem_avmm_readdatavalid,
---
-        --EMIF_RST_REQ            => emif_rst_req,
-        --EMIF_RST_DONE           => emif_rst_done,
-        --EMIF_ECC_USR_INT        => emif_ecc_usr_int,
-        --EMIF_CAL_SUCCESS        => emif_cal_success,
-        --EMIF_CAL_FAIL           => emif_cal_fail,
-        BOOT_MI_RESET           => io_reset,
+        MEM_CLK                => mem_clk,
+        MEM_RST                => not mem_rst_n,
 
+        MEM_AVMM_READY         => mem_avmm_ready,
+        MEM_AVMM_READ          => mem_avmm_read,
+        MEM_AVMM_WRITE         => mem_avmm_write,
+        MEM_AVMM_ADDRESS       => mem_avmm_address,
+        MEM_AVMM_BURSTCOUNT    => mem_avmm_burstcount,
+        MEM_AVMM_WRITEDATA     => mem_avmm_writedata,
+        MEM_AVMM_READDATA      => mem_avmm_readdata,
+        MEM_AVMM_READDATAVALID => mem_avmm_readdatavalid,
 
-        STATUS_LED_G         => status_led_g,
-        STATUS_LED_R         => status_led_r,
+        EMIF_RST_REQ           => emif_rst_req,
+        EMIF_RST_DONE          => emif_rst_done,
+        EMIF_ECC_USR_INT       => emif_ecc_usr_int,
+        EMIF_CAL_SUCCESS       => emif_cal_success,
+        EMIF_CAL_FAIL          => emif_cal_fail,
+        BOOT_MI_RESET          => io_reset,
 
-        MISC_IN              => (others => '0'),
-        MISC_OUT             => open
+        STATUS_LED_G           => status_led_g,
+        STATUS_LED_R           => status_led_r,
+
+        MISC_IN                => (others => '0'),
+        MISC_OUT               => open
     );
 
     USER_LED_G <= status_led_g(0);
     USER_LED_R <= status_led_r(0);
 
-end architecture;
+    ddr4_p0_i : component onboard_ddr4_0
+    port map (
+        local_reset_req      => emif_rst_req(0),
+        local_reset_done     => emif_rst_done(0),
+        pll_ref_clk          => P0_DDR4_REFCLK,
+        pll_ref_clk_out      => open,
+        pll_locked           => mem_pll_locked(0),
+        oct_rzqin            => P0_RZQ,
+        mem_ck               => P0_DDR4_CLK_P,
+        mem_ck_n             => P0_DDR4_CLK_N,
+        mem_a                => P0_DDR4_A,
+        mem_act_n            => P0_DDR4_ACT_L,
+        mem_ba               => P0_DDR4_BA,
+        mem_bg               => P0_DDR4_BG,
+        mem_cke              => P0_DDR4_CKE,
+        mem_cs_n             => P0_DDR4_CS_L,
+        mem_odt              => P0_DDR4_ODT,
+        mem_reset_n          => P0_DDR4_RESET_L,
+        mem_par              => P0_DDR4_PARITY,
+        mem_alert_n          => P0_DDR4_ALERT_L,
+        mem_dqs              => P0_DDR4_DQS_P,
+        mem_dqs_n            => P0_DDR4_DQS_N,
+        mem_dq               => P0_DDR4_DQ,
+        mem_dbi_n            => P0_DDR4_DM,
+        local_cal_success    => emif_cal_success(0),
+        local_cal_fail       => emif_cal_fail(0),
+        emif_usr_reset_n     => mem_rst_n(0),
+        emif_usr_clk         => mem_clk(0),
+        amm_ready_0          => mem_avmm_ready(0),
+        amm_read_0           => mem_avmm_read(0),
+        amm_write_0          => mem_avmm_write(0),
+        amm_address_0        => mem_avmm_address(0),
+        amm_readdata_0 (MEM_DATA_WIDTH-1 downto 0)   => mem_avmm_readdata(0),
+        amm_readdata_0 (576-1 downto MEM_DATA_WIDTH) => open,
+        amm_writedata_0(MEM_DATA_WIDTH-1 downto 0)   => mem_avmm_writedata(0),
+        amm_writedata_0(576-1 downto MEM_DATA_WIDTH) => (others => '0'),
+        amm_burstcount_0     => mem_avmm_burstcount(0),
+        amm_byteenable_0     => (others => '1'),
+        amm_readdatavalid_0  => mem_avmm_readdatavalid(0),
+        calbus_read          => calbus_read(0),
+        calbus_write         => calbus_write(0),
+        calbus_address       => calbus_address(0),
+        calbus_wdata         => calbus_wdata(0),
+        calbus_rdata         => calbus_rdata(0),
+        calbus_seq_param_tbl => calbus_seq_param_tbl(0),
+        calbus_clk           => calbus_clk(0)
+    );
 
+    ddr4_cal_p0_i : component ddr4_calibration
+    port map (
+        calbus_read_0               => calbus_read(0),              
+        calbus_write_0              => calbus_write(0),       
+        calbus_address_0            => calbus_address(0),     
+        calbus_wdata_0              => calbus_wdata(0),    
+        calbus_rdata_0              => calbus_rdata(0),       
+        calbus_seq_param_tbl_0      => calbus_seq_param_tbl(0),
+        calbus_clk                  => calbus_clk(0)
+    );
+
+    ddr4_p1_i : component onboard_ddr4_1
+    port map (
+        local_reset_req      => emif_rst_req(1),
+        local_reset_done     => emif_rst_done(1),
+        pll_ref_clk          => P1_DDR4_REFCLK,
+        pll_ref_clk_out      => open,
+        pll_locked           => mem_pll_locked(1),
+        oct_rzqin            => P1_RZQ,
+        mem_ck               => P1_DDR4_CLK_P,
+        mem_ck_n             => P1_DDR4_CLK_N,
+        mem_a                => P1_DDR4_A,
+        mem_act_n            => P1_DDR4_ACT_L,
+        mem_ba               => P1_DDR4_BA,
+        mem_bg               => P1_DDR4_BG,
+        mem_cke              => P1_DDR4_CKE,
+        mem_cs_n             => P1_DDR4_CS_L,
+        mem_odt              => P1_DDR4_ODT,
+        mem_reset_n          => P1_DDR4_RESET_L,
+        mem_par              => P1_DDR4_PARITY,
+        mem_alert_n          => P1_DDR4_ALERT_L,
+        mem_dqs              => P1_DDR4_DQS_P,
+        mem_dqs_n            => P1_DDR4_DQS_N,
+        mem_dq               => P1_DDR4_DQ,
+        mem_dbi_n            => P1_DDR4_DM,
+        local_cal_success    => emif_cal_success(1),
+        local_cal_fail       => emif_cal_fail(1),
+        emif_usr_reset_n     => mem_rst_n(1),
+        emif_usr_clk         => mem_clk(1),
+        amm_ready_0          => mem_avmm_ready(1),
+        amm_read_0           => mem_avmm_read(1),
+        amm_write_0          => mem_avmm_write(1),
+        amm_address_0        => mem_avmm_address(1),
+        amm_readdata_0       => mem_avmm_readdata(1),
+        amm_writedata_0      => mem_avmm_writedata(1),
+        amm_burstcount_0     => mem_avmm_burstcount(1),
+        amm_byteenable_0     => (others => '1'),
+        amm_readdatavalid_0  => mem_avmm_readdatavalid(1),
+        calbus_read          => calbus_read(1),
+        calbus_write         => calbus_write(1),
+        calbus_address       => calbus_address(1),
+        calbus_wdata         => calbus_wdata(1),
+        calbus_rdata         => calbus_rdata(1),
+        calbus_seq_param_tbl => calbus_seq_param_tbl(1),
+        calbus_clk           => calbus_clk(1)
+    );
+    
+    ddr4_cal_p1_i : component ddr4_calibration
+    port map (
+        calbus_read_0               => calbus_read(1),              
+        calbus_write_0              => calbus_write(1),       
+        calbus_address_0            => calbus_address(1),     
+        calbus_wdata_0              => calbus_wdata(1),    
+        calbus_rdata_0              => calbus_rdata(1),       
+        calbus_seq_param_tbl_0      => calbus_seq_param_tbl(1),
+        calbus_clk                  => calbus_clk(1)
+    );
+
+end architecture;

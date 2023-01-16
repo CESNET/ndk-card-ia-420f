@@ -19,6 +19,9 @@ lappend COMPONENTS [list "RESET"             $ASYNC_BASE/reset         "FULL"]
 lappend MOD "$ENTITY_BASE/ip/iopll_ip.ip"
 lappend MOD "$ENTITY_BASE/ip/reset_release_ip.ip"
 lappend MOD "$ENTITY_BASE/ip/mailbox_client_ip.ip"
+lappend MOD "$ENTITY_BASE/ip/ddr4_calibration.ip"
+lappend MOD "$ENTITY_BASE/ip/onboard_ddr4_0.ip"
+lappend MOD "$ENTITY_BASE/ip/onboard_ddr4_1.ip"
 
 if {$ARCHGRP_ARR(PCIE_ENDPOINT_MODE) == 0} {
     lappend MOD "$ENTITY_BASE/ip/ptile_pcie_1x16.ip"
