@@ -8,7 +8,7 @@ Bittware IA-420F
     - Name: IA-420F
     - Ethernet ports: 1x QSFP-DD
     - PCIe conectors: Edge connector
-    - `FPGA Card Website <https://www.bittware.com/ia-420f/>`_
+    - `FPGA Card Website <https://www.bittware.com/fpga/ia-420f/>`_
 - FPGA specification:
     - FPGA part number: ``AGFB014R24B2E2V``
     - Ethernet Hard IP: E-Tile (up to 100G Ethernet)
