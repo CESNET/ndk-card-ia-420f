@@ -18,7 +18,7 @@ set NET_MOD_ARCH "E_TILE"
 # Achitecture of SDM/SYSMON module
 set SDM_SYSMON_ARCH "INTEL_SDM"
 # Boot controller type
-set BOOT_TYPE 0
+set BOOT_TYPE 4
 # Total number of DMA modules/streams in FW
 set DMA_MODULES 2
 

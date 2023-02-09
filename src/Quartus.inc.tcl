@@ -31,8 +31,9 @@ lappend HIERARCHY(COMPONENTS) \
     [list "TOPLEVEL" $CARD_BASE/src $ARCHGRP_ALL]
 
 # Design parameters
-set SYNTH_FLAGS(MODULE) "FPGA"
-set SYNTH_FLAGS(FPGA)   "AGFB014R24B2E2V"
+set SYNTH_FLAGS(MODULE)    "FPGA"
+set SYNTH_FLAGS(FPGA)      "AGFB014R24B2E2V"
+set SYNTH_FLAGS(BITSTREAM) "RPD_ASX4"
 
 # QSF constraints for specific parts of the design
 set SYNTH_FLAGS(CONSTR) ""
